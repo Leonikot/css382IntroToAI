@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UWB CSS Course History</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header>
+    <div class="header-inner">
+      <h1>UWB CSS Course History</h1>
+      <p class="subtitle">Computing &amp; Software Systems — University of Washington Bothell</p>
+    </div>
+  </header>
+
+  <main>
+    <div class="search-panel">
+
+      <!-- Mode tabs -->
+      <div class="tab-group" role="tablist" aria-label="Search mode">
+        <button class="tab active" data-mode="professor"
+                id="tab-professor" role="tab" aria-selected="true"
+                aria-controls="results">
+          By Professor
+        </button>
+        <button class="tab" data-mode="course"
+                id="tab-course" role="tab" aria-selected="false"
+                aria-controls="results">
+          By Course
+        </button>
+      </div>
+
+      <!-- Search input -->
+      <div class="search-row">
+        <div class="input-wrap">
+          <label for="search-input" id="search-label" class="sr-only">Search</label>
+          <svg class="search-icon" viewBox="0 0 20 20" aria-hidden="true">
+            <circle cx="8.5" cy="8.5" r="5.5" stroke="currentColor" stroke-width="2" fill="none"/>
+            <line x1="13" y1="13" x2="18" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <input type="text" id="search-input" autocomplete="off"
+                 placeholder="Type a professor name…"
+                 aria-label="Search professor name"
+                 aria-autocomplete="list"
+                 aria-haspopup="listbox" />
+          <button id="clear-btn" class="clear-btn" hidden
+                  aria-label="Clear search">✕</button>
+          <ul id="autocomplete-list" class="autocomplete-list" role="listbox" hidden></ul>
+        </div>
+      </div>
+
+    </div><!-- /search-panel -->
+
+    <!-- Results -->
+    <section id="results" hidden>
+      <p id="summary-line" class="summary"></p>
+      <div class="table-wrap">
+        <table id="results-table">
+          <thead id="results-thead"></thead>
+          <tbody id="results-tbody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <p id="no-results" class="state-msg" hidden>No results found.</p>
+
+    <p id="data-error" class="state-msg error" hidden>
+      ⚠ <code>data.js</code> not found. Run <code>python3 scrape.py</code> first,
+      then reload this page.
+    </p>
+
+  </main>
+
+  <footer>
+    <p>
+      Data from
+      <a href="https://www.washington.edu/students/timeschd/B/" target="_blank" rel="noopener">
+        UW Bothell Time Schedule
+      </a>
+      &middot; Autumn 2021 – Summer 2025
+    </p>
+  </footer>
+
+  <!-- data.js MUST load before app.js (sets window.COURSE_DATA) -->
+  <script src="data.js" onerror="document.getElementById('data-error').hidden=false"></script>
+  <script src="app.js"></script>
+
+</body>
+</html>
